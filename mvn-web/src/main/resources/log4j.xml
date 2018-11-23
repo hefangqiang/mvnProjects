@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration debug="true">
+    <!-- 将日志信息输出到控制台 -->
+    <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <!-- 设置日志输出的样式 -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- 设置日志输出的格式 -->
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        </layout>
+        <!--过滤器设置输出的级别-->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <!-- 设置日志输出的最小级别 -->
+            <param name="levelMin" value="info" />
+            <!-- 设置日志输出的最大级别 -->
+            <param name="levelMax" value="ERROR" />
+        </filter>
+    </appender>
+
+
+    <!-- 将日志信息输出到文件，但是当文件的大小达到某个阈值的时候，日志文件会自动回滚 -->
+    <appender name="paperAppender" class="org.apache.log4j.RollingFileAppender">
+        <!-- 设置日志信息输出文件全路径名 -->
+        <param name="File" value="D:/Development/IdeaProjects/logs/paperLog.log" />
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true" />
+        <!-- 设置保存备份回滚日志的最大个数 -->
+        <param name="MaxBackupIndex" value="10" />
+        <!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB -->
+        <param name="MaxFileSize" value="50000KB" />
+        <!-- 设置日志输出的样式 -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- 设置日志输出的格式 -->
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        </layout>
+    </appender>
+
+
+    <appender name="rootAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="D:/Development/IdeaProjects/logs/rootLog.log" />
+        <param name="Append" value="true" />
+        <param name="MaxBackupIndex" value="10" />
+        <param name="MaxFileSize" value="50000KB" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        </layout>
+    </appender>
+
+    <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制-->
+    <logger name="paperLog" additivity="false">
+        <level value ="info"/>
+        <appender-ref ref="paperAppender"/>
+        <appender-ref ref="ConsoleAppender"/>
+    </logger>
+
+    <!-- 根logger的设置-->
+    <root>
+        <level value ="error"/>
+        <appender-ref ref="rootAppender"/>
+        <appender-ref ref="ConsoleAppender"/>
+        <!--<appender-ref ref="paperAppender"/>-->
+    </root>
+
+
+</log4j:configuration>
