@@ -37,10 +37,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 column">
+        <form action="${path}/paper/queryPaperById" name="idForm" method="post">
+            论文id：<input type="text" name="paperId" ><br><br>
+            <input type="submit" class="btn btn-primary" value="查询id" onclick="addPaper()">&nbsp;&nbsp;
+            <a class="btn btn-primary" href="${path}/paper/allPaper">查询所有</a>
             <a class="btn btn-primary" href="${path}/paper/toAddPaper">新增</a>
-        </div>
+        </form>
     </div>
+    <%--<div class="row">--%>
+        <%--<div class="col-md-4 column">--%>
+            <%--<a class="btn btn-primary" href="${path}/paper/toAddPaper">新增</a>--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <table class="table table-hover table-striped">

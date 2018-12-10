@@ -1,11 +1,14 @@
 package com.pojo;
 
+import java.io.Serializable;
+
 /**
  * @description： TODO
  * @author： Mr.He
  * @date： 2018-11-08 14:01
  **/
-public class Paper {
+public class Paper implements Serializable{
+
     private long paperId;
     private String paperName;
     private int paperNum;

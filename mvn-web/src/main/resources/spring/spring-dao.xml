@@ -9,7 +9,15 @@
 
     <!-- 配置mybatis-->
     <!-- 配置数据库相关参数properties的属性 -->
-    <context:property-placeholder location="classpath:/properties/jdbc.properties"/>
+    <context:property-placeholder location="classpath:/properties/jdbc.properties" ignore-unresolvable="true"/>
+    <!--<bean id="propertyConfigurer"  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/properties/jdbc.properties</value>
+                <value>classpath:/properties/redisLock.properties</value>
+            </list>
+        </property>
+    </bean>-->
     <!-- 配置数据库连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"/>

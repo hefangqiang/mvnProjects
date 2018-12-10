@@ -11,8 +11,12 @@
         <result property="paperNum" column="PAPER_NUMBER"/>
         <result property="paperDetail" column="PAPER_DETAIL"/>
     </resultMap>
-    <insert id="addPaper" parameterType="Paper">
-        INSERT INTO PAPER(PAPER_ID,PAPER_NAME,PAPER_NUMBER,PAPER_DETAIL) VALUES (PAPER_SQE.NEXTVAL,#{paperName}, #{paperNum}, #{paperDetail})
+    <!--<insert id="addPaper" parameterType="Paper">-->
+        <!--INSERT INTO PAPER(PAPER_ID,PAPER_NAME,PAPER_NUMBER,PAPER_DETAIL) VALUES (PAPER_SQE.NEXTVAL,#{paperName}, #{paperNum}, #{paperDetail})-->
+    <!--</insert>-->
+
+    <insert id="addPaper" parameterType="Paper" useGeneratedKeys="true" keyProperty="paperId">
+    INSERT INTO PAPER(PAPER_NAME,PAPER_NUMBER,PAPER_DETAIL) VALUES (#{paperName}, #{paperNum}, #{paperDetail})
     </insert>
 
     <delete id="deletePaperById" parameterType="long">

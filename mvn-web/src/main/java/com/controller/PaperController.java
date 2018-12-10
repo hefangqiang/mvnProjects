@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,7 +34,7 @@ public class PaperController {
     private static final Logger log= LoggerFactory.getLogger(PaperController.class);
 
     @RequestMapping("/allPaper")
-    private String list(Model model) {
+    public String list(Model model) {
         List<Paper> list = paperService.queryAllPaper();
         log.error("进入allPaper1,list:{}", list);
         paperLog.info("进入allPaper2,list:{}", list);
@@ -41,31 +42,41 @@ public class PaperController {
         return "allPaper";
     }
 
+    @RequestMapping("/queryPaperById")
+    public String queryPaperById(Model model,long paperId){
+        Paper paper = paperService.queryById(paperId);
+        paperLog.info("进入queryPaperById,paperId:{}", paperId);
+        List<Paper> list = new ArrayList<>();
+        list.add(paper);
+        model.addAttribute("list", list);
+        return "allPaper";
+    }
+
     @RequestMapping("/toAddPaper")
-    private String toAddPaper() {
+    public String toAddPaper() {
         return "addPaper";
     }
 
     @RequestMapping("/addPaper")
-    private String addPaper(Paper paper) {
+    public String addPaper(Paper paper) {
         paperService.addPaper(paper);
         return "redirect:/paper/allPaper";
     }
 
     @RequestMapping("/del/{paperId}")
-    private String deletePaper(@PathVariable("paperId") long id) {
+    public String deletePaper(@PathVariable("paperId") long id) {
         paperService.deletePaperById(id);
         return "redirect:/paper/allPaper";
     }
 
     @RequestMapping("/toUpdatePaper")
-    private  String toUpdatePaper(Model model,long id) {
+    public  String toUpdatePaper(Model model,long id) {
         model.addAttribute("paper", paperService.queryById(id));
         return "updatePaper";
     }
 
     @RequestMapping("/updatePaper")
-    private String updatePaper(Model model, Paper paper) {
+    public String updatePaper(Model model, Paper paper) {
         paperService.updatePaper(paper);
         paper=paperService.queryById(paper.getPaperId());
         model.addAttribute("paper",paper);

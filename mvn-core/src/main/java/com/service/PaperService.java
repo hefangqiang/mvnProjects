@@ -11,11 +11,11 @@ import java.util.List;
  **/
 public interface PaperService {
 
-    int addPaper(Paper paper);
+    Paper addPaper(Paper paper);
 
-    int deletePaperById(long id);
+    long deletePaperById(long id);
 
-    int updatePaper(Paper paper);
+    Paper updatePaper(Paper paper);
 
     Paper queryById(long id);
 

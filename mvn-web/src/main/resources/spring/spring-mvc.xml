@@ -27,6 +27,6 @@
     </bean>
 
     <!-- 扫描web相关的bean -->
-    <context:component-scan base-package="com.controller" />
+    <context:component-scan base-package="com.controller,com.redisLock,com.redis"/>
 
 </beans>
