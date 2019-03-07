@@ -6,13 +6,13 @@
     <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
         <!-- 设置日志输出的样式 -->
         <layout class="org.apache.log4j.PatternLayout">
-            <!-- 设置日志输出的格式 -->
-            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        <!-- 设置日志输出的格式 -->
+        <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
         </layout>
         <!--过滤器设置输出的级别-->
         <filter class="org.apache.log4j.varia.LevelRangeFilter">
             <!-- 设置日志输出的最小级别 -->
-            <param name="levelMin" value="info" />
+            <param name="levelMin" value="INFO" />
             <!-- 设置日志输出的最大级别 -->
             <param name="levelMax" value="ERROR" />
         </filter>
@@ -50,16 +50,26 @@
     <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制-->
     <logger name="paperLog" additivity="false">
         <level value ="info"/>
-        <appender-ref ref="paperAppender"/>
+        <!--<appender-ref ref="paperAppender"/>-->
         <appender-ref ref="ConsoleAppender"/>
     </logger>
 
+
+
+    <logger name="com.dao.PaperDao" >
+      <level value="DEBUG"></level>
+    </logger>
+
+    <logger name="com.mchange.v2" >
+        <level value="ERROR" />
+    </logger>
+
+
     <!-- 根logger的设置-->
     <root>
-        <level value ="error"/>
-        <appender-ref ref="rootAppender"/>
+        <level value ="INFO"/>
+        <!--<appender-ref ref="rootAppender"/>-->
         <appender-ref ref="ConsoleAppender"/>
-        <!--<appender-ref ref="paperAppender"/>-->
     </root>
 
 

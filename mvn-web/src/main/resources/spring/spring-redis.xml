@@ -10,11 +10,7 @@
     http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache-4.2.xsd">
 
-
     <context:property-placeholder location="classpath:/properties/redis.properties" ignore-unresolvable="true"/>
-
-    <cache:annotation-driven cache-manager="cacheManager"></cache:annotation-driven>
-
 
     <!--配置jedisPoolConfig-->
     <bean id="jedisPoolConfig"   class="redis.clients.jedis.JedisPoolConfig" >
@@ -27,17 +23,12 @@
         <property name="testWhileIdle" value="true" />
     </bean>
 
-    <!-- RedisClusterConfiguration -->
-    <!--<bean id="redisClusterConfiguration" class="org.springframework.data.redisLock.connection.RedisClusterConfiguration">-->
-        <!--<property name="clusterNodes" value="${spring.redisLock.cluster.nodes}"/>-->
-        <!--<property name="maxRedirects" value="${spring.redisLock.cluster.max-redirects}"/>-->
-    <!--</bean>-->
 
     <bean id="resourcePropertySource" class="org.springframework.core.io.support.ResourcePropertySource">
         <constructor-arg name="name" value="classpath:/properties/redis.properties"/>
         <constructor-arg name="resource" value="classpath:/properties/redis.properties"/>
     </bean>
-    <!-- Redis集群配置     这里使用的是spring-data-redisLock  包中内容 -->
+
     <!--redisCluster配置-->
     <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
         <constructor-arg name="propertySource" ref="resourcePropertySource"/>
@@ -71,12 +62,15 @@
         <property name="connectionFactory" ref="jedisConnectionFactory" />
     </bean>
 
+    <cache:annotation-driven cache-manager="cacheManager"></cache:annotation-driven>
+
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
             <set>
                 <bean class="com.redis.ReidsCache">
                     <property name="redisTemplate" ref="redisTemplate"/>
                     <property name="name" value="paperCache"/>
+                    <property name="timeout" value="0"/>
                 </bean>
             </set>
         </property>

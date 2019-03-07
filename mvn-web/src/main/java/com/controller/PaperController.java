@@ -36,8 +36,7 @@ public class PaperController {
     @RequestMapping("/allPaper")
     public String list(Model model) {
         List<Paper> list = paperService.queryAllPaper();
-        log.error("进入allPaper1,list:{}", list);
-        paperLog.info("进入allPaper2,list:{}", list);
+        paperLog.info("进入allPaper,list:{}", list);
         model.addAttribute("list", list);
         return "allPaper";
     }

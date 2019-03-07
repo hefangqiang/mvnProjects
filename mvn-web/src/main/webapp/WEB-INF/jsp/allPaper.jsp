@@ -31,7 +31,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    <small>论文列表 —— 显示所有论文</small>
+                    <small>论文列表</small>
                 </h1>
             </div>
         </div>

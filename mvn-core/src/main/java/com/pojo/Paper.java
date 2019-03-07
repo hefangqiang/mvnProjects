@@ -3,7 +3,7 @@ package com.pojo;
 import java.io.Serializable;
 
 /**
- * @description： TODO
+ * @description： 论文vo
  * @author： Mr.He
  * @date： 2018-11-08 14:01
  **/

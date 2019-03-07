@@ -20,4 +20,7 @@ public interface PaperService {
     Paper queryById(long id);
 
     List<Paper> queryAllPaper();
+
+    void addSms(Paper paper);
+
 }

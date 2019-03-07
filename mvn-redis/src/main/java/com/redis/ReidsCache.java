@@ -19,16 +19,21 @@ import java.util.concurrent.Callable;
 @Component
 public class ReidsCache implements Cache {
 
-    private  String name;
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+    private  String name;
+    private  long timeout;
+
 
     public void setName(String name) {
         this.name = name;
     }
-
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    public void setTimeout(long timeout) {
+        this.timeout = timeout;
     }
 
     @Override
@@ -45,7 +50,7 @@ public class ReidsCache implements Cache {
     public ValueWrapper get(Object key) {
         if (StringUtils.isEmpty(key)) {
             return null;
-        }else {
+        } else {
             final String finalKey;
             if (key instanceof String) {
                 finalKey = (String) key;
@@ -88,6 +93,9 @@ public class ReidsCache implements Cache {
             }
             redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
                 redisConnection.set(finalKey.getBytes(), SerializationUtils.serialize(value));
+                if(timeout!=0){
+                    redisConnection.expire(finalKey.getBytes(),timeout);
+                }
                 return true;
             });
         }

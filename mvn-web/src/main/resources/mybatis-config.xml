@@ -18,6 +18,7 @@
 
         <!-- 用于输出日志 log4j:LOG4J SLF4J -->
         <setting name="logImpl" value="SLF4J"/>
+
     </settings>
 
     <!--<mappers>  可配置不同路径多个xml-->

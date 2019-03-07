@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.pojo.Message;
 import com.pojo.Paper;
 
 import java.util.List;
@@ -25,4 +26,5 @@ public interface PaperDao {
 
     List<Paper> queryAllPaper();
 
+    int addSms(Message message);
 }

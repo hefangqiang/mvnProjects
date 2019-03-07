@@ -39,4 +39,9 @@
         FROM PAPER
     </select>
 
+    <insert id="addSms" parameterType="Message">
+       insert into messages(message_name,message_number,message_information)
+         values (#{messageName},#{messageNumber},#{messageInformation})
+    </insert>
+
 </mapper>
